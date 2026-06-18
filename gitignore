@@ -1,0 +1,11 @@
+# Compiled objects / binaries
+*.o
+*.obj
+*.exe
+*.out
+game
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/

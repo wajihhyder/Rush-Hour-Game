@@ -5,9 +5,15 @@
 
 #ifndef UTIL_H_
 #define UTIL_H_
+#if defined(_WIN32)
 #include <Windows.h>
-#include <GL\glew.h> 
-#include <GL\freeglut.h>
+#include <GL/glew.h>
+#include <GL/freeglut.h>
+#elif defined(__APPLE__)
+#include <GLUT/glut.h>
+#else
+#include <GL/freeglut.h>
+#endif
 
 
 //#include <GL/gl.h>
@@ -16,6 +22,7 @@
 #include<string>
 #include<cmath>
 #include <sstream>// for basic math functions such as cos, sin, sqrt
+#define cimg_display 0   // CImg is used only to read pixels; disable its GUI/X11 display
 #include "CImg.h"
 #include<vector>
 using namespace std;
@@ -296,7 +303,9 @@ static float colors[][3] = { { 0.501960784313726, 0, 0 }, { 0.545098039215686,
 		{ 0, 0, 0 }, { 0.734375, 0.734375, 0.734375} };
 
 //defining some MACROS
-#define M_PI 3.141519
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
 #define MAX(A,B) ((A) > (B) ? (A):(B)) // finds max of two numbers
 #define MIN(A,B) ((A) < (B) ? (A):(B)) // find min of two numbers
 #define ABS(A) ((A) < (0) ? -(A):(A))  // find ABS of a given number

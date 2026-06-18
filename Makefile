@@ -1,18 +1,17 @@
-CXXFLAGS =	-g3 -Wall -fmessage-length=0 #-Werror
+CXX      = g++
+CXXFLAGS = -g -Wall -std=c++14 -fmessage-length=0
 
-OBJS =		 util.o game.o
+# game.cpp = game logic, util.cpp = drawing primitives
+OBJS   = util.o game.o
+TARGET = game
 
-LIBS = -L/usr/X11R6/lib -L/sw/lib -L/usr/sww/lib -L/usr/sww/bin -L/usr/sww/pkg/Mesa/lib -lglut -lGLU -lGL -lX11 -lfreeimage -pthread
+# Linux/X11 link flags. freeglut provides libglut.
+LIBS = -lglut -lGLU -lGL -lX11 -lm -pthread
 
-
-
-TARGET =	game
-
-
-$(TARGET):	$(OBJS) 
+$(TARGET): $(OBJS)
 	$(CXX) -o $(TARGET) $(OBJS) $(LIBS)
 
-all:	$(TARGET)
+all: $(TARGET)
 
 clean:
 	rm -f $(OBJS) $(TARGET)
